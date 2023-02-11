@@ -5,6 +5,7 @@ import string
 from ioc_finder import find_iocs
 
 from machina.core.worker import Worker
+from machina.core.models.utils import resolve_db_node_cls
 
 def _strings(data, min=4):
     result = ""
@@ -40,7 +41,7 @@ class FindURLs(Worker):
         self.logger.info(f"found urls: {urls}")
 
         # get the appropriate OGM class for the object that was analyzed
-        obj_cls = self.resolve_db_node_cls(data['type']) 
+        obj_cls = resolve_db_node_cls(data['type']) 
         obj = obj_cls.nodes.get(uid=data['uid'])
 
         # For each URL, resubmit the URL to Identifier and
