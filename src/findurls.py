@@ -31,7 +31,7 @@ class FindURLs(Worker):
         data = json.loads(data)
 
         # resolve path
-        target = self.get_binary_path(data['ts'], data['hashes']['md5'])
+        target = self.get_binary_path(data['ts'], data['hashes']['md5'], data['type'])
 
         with open(target, 'r', errors="ignore") as f:
             strings = ' '.join(_strings(f.read()))
